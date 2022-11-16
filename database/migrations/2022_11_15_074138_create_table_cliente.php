@@ -11,12 +11,13 @@ class CreateTableCliente extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('table_cliente', function (Blueprint $table) {
+        Schema::create('clientes', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
-            $table->string('telefone');
-            $table->string('cpf');
-            $table->string('placa');
+            $table->string('telefone')->unique();
+            $table->char('cpf', 11)->unique();
+            $table->char('placa', 7)->unique();
+            $table->timestamps();
         });
     }
 
@@ -26,6 +27,6 @@ class CreateTableCliente extends Migration {
      * @return void
      */
     public function down() {
-        Schema::dropIfExists('table_cliente');
+        Schema::dropIfExists('clientes');
     }
 }

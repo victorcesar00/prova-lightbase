@@ -2,8 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::group([ 'prefix' => 'cliente' ], function() {
-    Route::post('/', [CheckoutController::class, 'createOrder']);
+use App\Http\Controllers\ClienteController;
 
-    Route::get('/createFormCode/{prodId}', [CheckoutController::class, 'createFormCode']);
+Route::group([ 'prefix' => 'cliente' ], function() {
+    Route::post('/', [ClienteController::class, 'createCliente']);
+
+    Route::put('/{id}', [ClienteController::class, 'editCliente']);
+
+    Route::delete('/{id}', [ClienteController::class, 'deleteCliente']);
+
+    Route::get('/{id}', [ClienteController::class, 'getCliente']);
+    Route::get('/consulta/final-placa/{character}', [ClienteController::class, 'getClientesByPlacaLastCharacter']);
 });
